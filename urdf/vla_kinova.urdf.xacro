@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="gen3">
+
+  <xacro:arg name="robot_ip" default="xxx.yyy.zzz.www" />
+  <xacro:arg name="name" default="gen3" />
+  <xacro:arg name="arm" default="gen3" />
+  <xacro:arg name="dof" default="7" />
+  
+  <xacro:arg name="vision" default="false" /> 
+  
+  <xacro:arg name="prefix" default="" />
+  <xacro:arg name="sim_gazebo" default="false" />
+  <xacro:arg name="sim_ignition" default="true" />
+  <xacro:arg name="simulation_controllers" default="" />
+  <xacro:arg name="gripper" default="" />
+
+  <xacro:include filename="$(find kortex_description)/robots/kinova.urdf.xacro" />
+
+  <xacro:if value="${'$(arg vision)' == 'false'}">
+  
+    <link name="$(arg prefix)camera_link">
+      <inertial>
+        <mass value="0.001" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.000001" ixy="0" ixz="0" iyy="0.000001" iyz="0" izz="0.000001" />
+      </inertial>
+    </link>
+    <joint name="$(arg prefix)camera_module" type="fixed">
+      <origin xyz="0 0.05639 -0.00305" rpy="3.14159265358979 3.14159265358979 0" />
+      <parent link="$(arg prefix)end_effector_link" />
+      <child  link="$(arg prefix)camera_link" />
+    </joint>
+    
+    <link name="$(arg prefix)camera_depth_frame" />
+    <joint name="$(arg prefix)depth_module" type="fixed">
+      <origin xyz="0.0275 0.066 -0.00305" rpy="3.14159265358979 3.14159265358979 0" />
+      <parent link="$(arg prefix)end_effector_link" />
+      <child  link="$(arg prefix)camera_depth_frame" />
+    </joint>
+    
+    <link name="$(arg prefix)camera_color_frame" />
+    <joint name="$(arg prefix)color_module" type="fixed">
+      <origin xyz="0 0.05639 -0.00305" rpy="3.14159265358979 3.14159265358979 0" />
+      <parent link="$(arg prefix)end_effector_link" />
+      <child  link="$(arg prefix)camera_color_frame" />
+    </joint>
+    
+  </xacro:if>
+
+  <link name="$(arg prefix)color_optical_frame"/>
+  <joint name="$(arg prefix)color_optical_joint" type="fixed">
+    <parent link="$(arg prefix)camera_color_frame"/>
+    <child link="$(arg prefix)color_optical_frame"/>
+    <origin xyz="0 0 0" rpy="-1.57079632679 0 -1.57079632679"/>
+  </joint>
+
+</robot>
