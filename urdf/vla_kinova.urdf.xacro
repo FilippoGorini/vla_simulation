@@ -73,6 +73,25 @@
     <origin xyz="0 0 0" rpy="0 0 0" />
   </xacro:load_robot>
 
+  <!-- FORCE GRIPPER TO SPAWN OPEN (0.0) TO PREVENT MIMIC JOINT EXPLOSION -->
+  <!-- This overrides the 0.7929 default in the robotiq_description -->
+  <!-- <ros2_control name="gen3_gripper_fix" type="system">
+    <hardware>
+      <xacro:if value="$(arg sim_ignition)">
+        <plugin>ign_ros2_control/IgnitionSystem</plugin>
+      </xacro:if>
+      <xacro:unless value="$(arg sim_ignition)">
+        <plugin>mock_components/GenericSystem</plugin>
+      </xacro:unless>
+    </hardware>
+    <joint name="$(arg prefix)robotiq_85_left_knuckle_joint">
+      <command_interface name="position" />
+      <state_interface name="position">
+        <param name="initial_value">0.0</param>
+      </state_interface>
+    </joint>
+  </ros2_control> -->
+
   <!-- Local definition of Gazebo plugins and sensor overrides -->
   <xacro:if value="$(arg sim_ignition)">
     <gazebo>
