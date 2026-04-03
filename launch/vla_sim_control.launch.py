@@ -71,10 +71,9 @@ def launch_setup(context, *args, **kwargs):
     gripper = LaunchConfiguration("gripper")
 
     robot_controllers = PathJoinSubstitution(
-        # https://answers.ros.org/question/397123/how-to-access-the-runtime-value-of-a-launchconfiguration-instance-within-custom-launch-code-injected-via-an-opaquefunction-in-ros2/
         [
-            FindPackageShare(description_package),
-            "arms/" + robot_type.perform(context) + "/" + dof.perform(context) + "dof/config",
+            FindPackageShare("vla_simulation"),
+            "config",
             controllers_file,
         ]
     )
@@ -354,7 +353,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "description_package",
-            default_value="kortex_description",
+            default_value="vla_simulation",
             description="Description package with robot URDF/XACRO files. Usually the argument \
         is not set, it enables use of a custom description.",
         )

@@ -32,7 +32,7 @@
   <xacro:arg name="camera_height" default="480"/>
   <xacro:arg name="camera_fps" default="6"/>
   <xacro:arg name="moveit_active" default="false"/>
-  <xacro:arg name="initial_positions_file" default="$(find kortex_description)/config/initial_positions.yaml"/>
+  <xacro:arg name="initial_positions_file" default="$(find vla_simulation)/config/initial_positions.yaml"/>
 
   <!-- convert to property to use substitution in function -->
   <xacro:property name="initial_positions_file" default="$(arg initial_positions_file)"/>

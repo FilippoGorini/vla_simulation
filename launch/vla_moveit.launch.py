@@ -43,6 +43,7 @@ def launch_setup(context, *args, **kwargs):
     launch_arguments = {
         "robot_ip": robot_ip,
         "use_fake_hardware": use_fake_hardware,
+        "sim_ignition": use_sim,  # Automatically pass sim flag to URDF
         "gripper": "robotiq_2f_85",
         "gripper_joint_name": "robotiq_85_left_knuckle_joint",
         "dof": "6",
@@ -58,12 +59,16 @@ def launch_setup(context, *args, **kwargs):
             file_path="urdf/vla_kinova.urdf.xacro",
             mappings=launch_arguments,
         )
-        .robot_description_semantic(file_path="config/gen3.srdf")
-        .trajectory_execution(file_path="config/moveit_controllers.yaml")
+        .robot_description_semantic(file_path="config/moveit/gen3.srdf")
+        .robot_description_kinematics(file_path="config/moveit/kinematics.yaml")
+        .joint_limits(file_path="config/moveit/joint_limits.yaml")
+        .trajectory_execution(file_path="config/moveit/moveit_controllers.yaml")
         .planning_scene_monitor(
             publish_robot_description=True, publish_robot_description_semantic=True
         )
-        .planning_pipelines(pipelines=["ompl", "pilz_industrial_motion_planner"])
+        .planning_pipelines(
+            pipelines=["ompl", "pilz_industrial_motion_planner"],
+        )
         .to_moveit_configs()
     )
 
@@ -153,7 +158,7 @@ def launch_setup(context, *args, **kwargs):
     # rviz with moveit configuration
     # Changed: rviz config path points to vla_simulation
     rviz_config_file = os.path.join(
-        get_package_share_directory("vla_simulation"), "config", "moveit.rviz"
+        get_package_share_directory("vla_simulation"), "config", "moveit", "moveit.rviz"
     )
     rviz_node = Node(
         package="rviz2",
@@ -236,7 +241,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "use_fake_hardware",
-            default_value="true",
+            default_value="false",
             description="Start robot with fake hardware mirroring command to its states.",
         )
     )

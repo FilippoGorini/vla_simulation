@@ -24,7 +24,7 @@ if(BUILD_TESTING)
 endif()
 
 # we need to tell the package to copy launch, urdf and worlds folders into the share directory of the workspace
-install(DIRECTORY launch urdf worlds config models
+install(DIRECTORY launch urdf worlds config models rviz
   DESTINATION share/${PROJECT_NAME}
 )
 
