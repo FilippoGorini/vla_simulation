@@ -52,19 +52,37 @@
     <include>
       <uri>model://craftsman_grip_screwdriver_phillips_cushion</uri>
       <name>craftsman_grip_screwdriver_phillips_cushion</name>
-      <pose>0.15 0.3 0.8 0 0 0</pose>
+      <pose>0.15 -0.3 1 1.9871 -0.7382 -2.7475</pose>
     </include>
 
     <include>
       <uri>model://cole_hardware_hammer_black</uri>
       <name>cole_hardware_hammer_black</name>
-      <pose>0.15 -0.3 0.8 0 0 0</pose>
+      <pose>0.15 0.3 1 2.5222 0.6350 2.8259</pose>
     </include>
 
     <include>
       <uri>model://3M_Vinyl_Tape_Green_1_x_36_yd</uri>
       <name>3M_Vinyl_Tape_Green_1_x_36_yd</name>
-      <pose>0 0 0.8 0.4 0.2 0</pose>
+      <pose>0.15 0 1 0.0302 -0.5292 0.7729</pose>
+    </include>
+
+    <include>
+      <uri>model://Diamond_Visions_Scissors_Red</uri>
+      <name>Diamond_Visions_Scissors_Red</name>
+      <pose>-0.05 0.3 1 -1.7491 1.4117 -2.0494</pose>
+    </include>
+
+    <include>
+      <uri>model://Android_Figure_Orange</uri>
+      <name>Android_Figure_Orange</name>
+      <pose>-0.05 -0.3 1 -2.3786 -0.5511 2.2019</pose>
+    </include>
+
+    <include>
+      <uri>model://Schleich_Allosaurus</uri>
+      <name>Schleich_Allosaurus</name>
+      <pose>-0.05 0 1 1.6806 -0.8471 -1.8699</pose>
     </include>
 
     <!-- Natural light from a "window" (Reduced Intensity) -->

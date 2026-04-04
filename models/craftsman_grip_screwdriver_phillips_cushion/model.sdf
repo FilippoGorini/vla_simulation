@@ -26,6 +26,7 @@ to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
                     </mesh>
                 </geometry>
             </collision>
+<!-- The inertial parameters are approximations computed in Blender assuming homogeneous density -->
             <inertial>
                 <pose>0.059805 0.004184 0.015692 0 0 0</pose>
                 <mass>0.10775883</mass>

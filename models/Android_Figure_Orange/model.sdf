@@ -8,13 +8,12 @@ http://creativecommons.org/licenses/by/4.0/ or send a letter
 to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
 -->
 <sdf version="1.6">
-  <model name="Cole_Hardware_Hammer_Black">
+  <model name="Android_Figure_Orange">
     <link name="link_0">
       <visual name="visual">
         <geometry>
           <mesh>
             <uri>meshes/model.obj</uri>
-            <scale>0.8 0.8 0.8</scale>
           </mesh>
         </geometry>
       </visual>
@@ -22,21 +21,20 @@ to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
         <geometry>
           <mesh>
             <uri>meshes/model.obj</uri>
-            <scale>0.8 0.8 0.8</scale>
           </mesh>
         </geometry>
       </collision>
 <!-- The inertial parameters are approximations computed in Blender assuming homogeneous density -->
       <inertial>
-        <pose>0.060159 -0.006852 0.034571 0 0 0</pose>
-        <mass>1.25379180</mass>
+        <pose>0.000193 0.000027 0.039949 0 0 0</pose>
+        <mass>0.03972221</mass>
         <inertia>
-          <ixx>5.97068458e-04</ixx>
-          <ixy>-1.64089715e-06</ixy>
-          <ixz>-5.12841973e-04</ixz>
-          <iyy>4.91864840e-03</iyy>
-          <iyz>6.04632476e-07</iyz>
-          <izz>4.58036643e-03</izz>
+          <ixx>1.68092265e-05</ixx>
+          <ixy>-3.75240717e-07</ixy>
+          <ixz>9.01567709e-10</ixz>
+          <iyy>1.80035740e-05</iyy>
+          <iyz>7.00063651e-08</iyz>
+          <izz>1.03577158e-05</izz>
         </inertia>
       </inertial>
     </link>
