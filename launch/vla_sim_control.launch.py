@@ -49,6 +49,11 @@ def launch_setup(context, *args, **kwargs):
         models_path
     )
 
+    gz_resource_path = AppendEnvironmentVariable(
+        'GZ_SIM_RESOURCE_PATH',
+        models_path
+    )
+
 
     # Initialize Arguments
     sim_gazebo = LaunchConfiguration("sim_gazebo")
@@ -257,11 +262,22 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(sim_ignition),
     )
 
+    # Path to gazebo gui config file
+    gui_config_path = PathJoinSubstitution(
+        [FindPackageShare("vla_simulation"), "config", "gui.config"]
+    )
+
     ignition_launch_description = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             [FindPackageShare("ros_gz_sim"), "/launch/gz_sim.launch.py"]
         ),
-        launch_arguments={"ign_args": [" -r -v 3 ", PathJoinSubstitution([FindPackageShare('vla_simulation'), 'worlds', 'vla_simulation_world.sdf'])]}.items(),
+        # Changed 'ign_args' to 'gz_args' (ign_args is deprecated) and added the --gui-config flag
+        launch_arguments={"gz_args": [
+            " -r -v 3 ", 
+            PathJoinSubstitution([FindPackageShare('vla_simulation'), 'worlds', 'vla_simulation_world.sdf']),
+            " --gui-config ",
+            gui_config_path,
+        ]}.items(),
         condition=IfCondition(sim_ignition),
     )
 
@@ -281,6 +297,7 @@ def launch_setup(context, *args, **kwargs):
 
     nodes_to_start = [
         resource_path,
+        gz_resource_path,
         bridge,
         robot_state_publisher_node,
         joint_state_broadcaster_spawner,

@@ -27,10 +27,10 @@
   <xacro:arg name="fake_sensor_commands" default="false" />
   <xacro:arg name="sim_isaac" default="false" />
   <xacro:arg name="use_external_cable" default="false" />
-  <xacro:arg name="gazebo_renderer" default="ogre"/>
+  <xacro:arg name="gazebo_renderer" default="ogre2"/>
   <xacro:arg name="camera_width" default="640"/>
   <xacro:arg name="camera_height" default="480"/>
-  <xacro:arg name="camera_fps" default="6"/>
+  <xacro:arg name="camera_fps" default="30"/>
   <xacro:arg name="moveit_active" default="false"/>
   <xacro:arg name="initial_positions_file" default="$(find vla_simulation)/config/initial_positions.yaml"/>
 

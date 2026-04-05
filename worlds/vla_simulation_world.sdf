@@ -1,5 +1,5 @@
 <sdf version='1.9'>
-  <world name='empty'>
+  <world name='vla_simulation'>
     <physics name='1ms' type='ignored'>
       <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
@@ -24,12 +24,24 @@
       <static>true</static>
       <link name='link'>
         <collision name='collision'>
-          <geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
           <surface><friction><ode/></friction><bounce/><contact/></surface>
         </collision>
         <visual name='visual'>
-          <geometry><plane><normal>0 0 1</normal><size>100 100</size></plane></geometry>
-          <material><ambient>0.8 0.8 0.8 1</ambient><diffuse>0.3 0.3 0.3 1</diffuse><specular>0.8 0.8 0.8 1</specular></material>
+          <geometry><plane><normal>0 0 1</normal><size>20 20</size></plane></geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.3 0.3 0.3 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+            
+            <pbr>
+              <metal>
+                <albedo>0.3 0.3 0.3 1</albedo>
+                <roughness>0.2</roughness> <metalness>0.0</metalness>
+              </metal>
+            </pbr>
+            
+          </material>
         </visual>
         <pose>0 0 0 0 -0 0</pose>
         <inertial>
@@ -52,40 +64,39 @@
     <include>
       <uri>model://craftsman_grip_screwdriver_phillips_cushion</uri>
       <name>craftsman_grip_screwdriver_phillips_cushion</name>
-      <pose>0.15 -0.3 1 1.9871 -0.7382 -2.7475</pose>
+      <pose>0.2 -0.3 1 1.9871 -0.7382 -2.7475</pose>
     </include>
 
     <include>
       <uri>model://cole_hardware_hammer_black</uri>
       <name>cole_hardware_hammer_black</name>
-      <pose>0.15 0.3 1 2.5222 0.6350 2.8259</pose>
+      <pose>0.2 0.3 1 2.5222 0.6350 2.8259</pose>
     </include>
 
     <include>
       <uri>model://3M_Vinyl_Tape_Green_1_x_36_yd</uri>
       <name>3M_Vinyl_Tape_Green_1_x_36_yd</name>
-      <pose>0.15 0 1 0.0302 -0.5292 0.7729</pose>
+      <pose>0.2 0 1 0.0302 -0.5292 0.7729</pose>
     </include>
 
     <include>
       <uri>model://Diamond_Visions_Scissors_Red</uri>
       <name>Diamond_Visions_Scissors_Red</name>
-      <pose>-0.05 0.3 1 -1.7491 1.4117 -2.0494</pose>
+      <pose>0.0 0.3 1 -1.7491 1.4117 -2.0494</pose>
     </include>
 
     <include>
       <uri>model://Android_Figure_Orange</uri>
       <name>Android_Figure_Orange</name>
-      <pose>-0.05 -0.3 1 -2.3786 -0.5511 2.2019</pose>
+      <pose>0.0 -0.3 1 -2.3786 -0.5511 2.2019</pose>
     </include>
 
     <include>
       <uri>model://Schleich_Allosaurus</uri>
       <name>Schleich_Allosaurus</name>
-      <pose>-0.05 0 1 1.6806 -0.8471 -1.8699</pose>
+      <pose>-0.0 0 1 1.6806 -0.8471 -1.8699</pose>
     </include>
 
-    <!-- Natural light from a "window" (Reduced Intensity) -->
     <light name='sun_directional' type='directional'>
       <pose>10 10 10 0 0 0</pose>
       <cast_shadows>true</cast_shadows>
@@ -95,7 +106,6 @@
       <specular>0.2 0.2 0.2 1</specular>
     </light>
 
-    <!-- Overhead Lab Lighting (Reduced Intensity) -->
     <light name='ceiling_panel_1' type='point'>
       <pose>1.5 1.5 4.0 0 0 0</pose>
       <intensity>0.25</intensity>
