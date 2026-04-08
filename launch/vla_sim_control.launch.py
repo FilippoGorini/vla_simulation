@@ -291,6 +291,8 @@ def launch_setup(context, *args, **kwargs):
             "/wrist_mounted_camera/depth_image@sensor_msgs/msg/Image[ignition.msgs.Image",
             "/wrist_mounted_camera/points@sensor_msgs/msg/PointCloud2[ignition.msgs.PointCloudPacked",
             "/wrist_mounted_camera/camera_info@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo",
+            "/external_camera@sensor_msgs/msg/Image[ignition.msgs.Image", 
+            "/external_camera@sensor_msgs/msg/CameraInfo[ignition.msgs.CameraInfo",
         ],
         output="screen",
     )

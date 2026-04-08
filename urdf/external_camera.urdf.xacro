@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="external_camera" params="prefix parent *origin">
+
+    <link name="${prefix}external_camera_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.05 0.05 0.05" />
+        </geometry>
+        <material name="grey">
+          <color rgba="0.5 0.5 0.5 1.0" />
+        </material>
+      </visual>
+      <inertial>
+        <mass value="0.1" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001" />
+      </inertial>
+    </link>
+
+    <joint name="${prefix}external_camera_joint" type="fixed">
+      <xacro:insert_block name="origin" />
+      <parent link="${parent}" />
+      <child link="${prefix}external_camera_link" />
+    </joint>
+
+    <!-- Optical frame for ROS (Z forward) -->
+    <link name="${prefix}external_camera_optical_frame" />
+    <joint name="${prefix}external_camera_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="-1.57079632679 0 -1.57079632679" />
+      <parent link="${prefix}external_camera_link" />
+      <child link="${prefix}external_camera_optical_frame" />
+    </joint>
+
+    <gazebo reference="${prefix}external_camera_link">
+      <sensor name="external_camera" type="camera">
+        <camera>
+          <horizontal_fov>1.74533</horizontal_fov> <!-- 100 degrees -->
+          <image>
+            <width>1280</width>
+            <height>720</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>10</far>
+          </clip>
+          <optical_frame_id>${prefix}external_camera_optical_frame</optical_frame_id>
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <visualize>true</visualize>
+        <topic>external_camera</topic>
+        <ignition_frame_id>${prefix}external_camera_link</ignition_frame_id>
+      </sensor>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

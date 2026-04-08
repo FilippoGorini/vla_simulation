@@ -39,6 +39,9 @@
 
   <!-- Import the core robot macro instead of the stock kinova.urdf.xacro -->
   <xacro:include filename="$(find kortex_description)/robots/kortex_robot.xacro" />
+  
+  <!-- Import external camera -->
+  <xacro:include filename="$(find vla_simulation)/urdf/external_camera.urdf.xacro" />
 
   <!-- Create link fixed to the "world" -->
   <link name="world" />
@@ -73,24 +76,11 @@
     <origin xyz="0 0 0" rpy="0 0 0" />
   </xacro:load_robot>
 
-  <!-- FORCE GRIPPER TO SPAWN OPEN (0.0) TO PREVENT MIMIC JOINT EXPLOSION -->
-  <!-- This overrides the 0.7929 default in the robotiq_description -->
-  <!-- <ros2_control name="gen3_gripper_fix" type="system">
-    <hardware>
-      <xacro:if value="$(arg sim_ignition)">
-        <plugin>ign_ros2_control/IgnitionSystem</plugin>
-      </xacro:if>
-      <xacro:unless value="$(arg sim_ignition)">
-        <plugin>mock_components/GenericSystem</plugin>
-      </xacro:unless>
-    </hardware>
-    <joint name="$(arg prefix)robotiq_85_left_knuckle_joint">
-      <command_interface name="position" />
-      <state_interface name="position">
-        <param name="initial_value">0.0</param>
-      </state_interface>
-    </joint>
-  </ros2_control> -->
+  <!-- External Camera -->
+  <xacro:external_camera prefix="$(arg prefix)" parent="$(arg prefix)base_link">
+    <origin xyz="0.8 0.0 0.8" rpy="0 0.872665 3.14159265359" />    
+    <!-- camera tilted 50 degrees, 0.8 meters in front and 0.8 meters higher than the robot's base -->
+  </xacro:external_camera>
 
   <!-- Local definition of Gazebo plugins and sensor overrides -->
   <xacro:if value="$(arg sim_ignition)">
