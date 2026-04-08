@@ -28,4 +28,9 @@ install(DIRECTORY launch urdf worlds config models rviz
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(PROGRAMS
+  scripts/home_robot.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
 ament_package()

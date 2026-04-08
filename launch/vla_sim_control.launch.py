@@ -295,6 +295,24 @@ def launch_setup(context, *args, **kwargs):
         output="screen",
     )
 
+    # Home robot node
+    home_robot = Node(
+        package="vla_simulation",
+        executable="home_robot.py",
+        name="home_robot",
+        output="screen",
+        arguments=["--prefix", prefix],
+        condition=IfCondition(LaunchConfiguration("home_robot")),
+    )
+
+    # Delay homing script until after the joint trajectory controller is spawned
+    delay_homing_after_controller_spawner = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=robot_traj_controller_spawner,
+            on_exit=[home_robot],
+        )
+    )
+
     nodes_to_start = [
         resource_path,
         gz_resource_path,
@@ -312,6 +330,7 @@ def launch_setup(context, *args, **kwargs):
         ignition_launch_description,
         ignition_spawn_entity,
         gazebo_bridge,
+        delay_homing_after_controller_spawner,
     ]
 
     return nodes_to_start
@@ -443,6 +462,9 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument("launch_rviz", default_value="false", description="Launch RViz?")
+    )
+    declared_arguments.append(
+        DeclareLaunchArgument("home_robot", default_value="true", description="Move robot to home position on startup?")
     )
 
     return LaunchDescription(declared_arguments + [OpaqueFunction(function=launch_setup)])
